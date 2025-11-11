@@ -1,31 +1,89 @@
-# Getting Started with Create React App
+# Frontend - Sistema de Gestión Académica
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend del Sistema de Gestión Académica desarrollado con React y TypeScript.
 
-## Available Scripts
+## 🚀 Empezando
 
-In the project directory, you can run:
+### Requisitos Previos
+- Node.js 16+
+- npm 8+
+- Backend del sistema en ejecución
 
-### `npm start`
+### Configuración del Entorno
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. **Crear archivo `.env.local`** en la raíz del proyecto con el siguiente contenido:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```env
+# URL de la API del backend
+NEXT_PUBLIC_API_URL=http://localhost:3000
 
-### `npm test`
+# Configuración de autenticación
+NEXT_PUBLIC_JWT_SECRET=tu_clave_secreta_muy_segura
+NEXT_PUBLIC_JWT_EXPIRES_IN=1d
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Configuración de CORS
+NEXT_PUBLIC_CORS_ORIGIN=http://localhost:3000
+```
 
-### `npm run build`
+### Instalación
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Instalar dependencias:
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Iniciar el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+3. Abrir [http://localhost:3000](http://localhost:3000) en tu navegador.
+
+## 📋 Scripts Disponibles
+
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Compila la aplicación para producción
+- `npm run start` - Inicia el servidor de producción
+- `npm run lint` - Ejecuta el linter
+- `npm test` - Ejecuta las pruebas
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Next.js 14** - Framework de React
+- **TypeScript** - Tipado estático
+- **Tailwind CSS** - Estilizado
+- **React Query** - Manejo de estado del servidor
+- **Zod** - Validación de esquemas
+- **React Hook Form** - Manejo de formularios
+
+## 📌 Credenciales de Prueba
+
+- **Administrador:**
+  - Email: `admin@universidad.edu`
+  - Contraseña: `password123`
+
+- **Profesor:**
+  - Email: `profesor@universidad.edu`
+  - Contraseña: `password123`
+
+- **Estudiante:**
+  - Email: `estudiante@universidad.edu`
+  - Contraseña: `password123`
+
+## 🔧 Estructura del Proyecto
+
+```
+frontend/
+├── src/
+│   ├── app/            # Rutas de la aplicación
+│   ├── components/     # Componentes reutilizables
+│   ├── contexts/       # Contextos de React
+│   ├── hooks/          # Custom hooks
+│   ├── lib/            # Utilidades y configuraciones
+│   ├── services/       # Llamadas a la API
+│   └── styles/         # Estilos globales
+└── public/             # Archivos estáticos
+```
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 

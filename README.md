@@ -36,9 +36,71 @@ Sistema de gestión académica desarrollado para la materia de Seminario Integra
 ## 🚀 Cómo Empezar
 
 1. Clonar el repositorio
-2. Configurar las variables de entorno
+2. Configurar las variables de entorno (ver sección de configuración a continuación)
 3. Instalar dependencias: `npm install`
 4. Iniciar el servidor: `npm run start:dev`
+
+## 🔧 Configuración del Entorno
+
+### Backend (NestJS)
+
+1. **Crear archivo `.env`** en `/backend/.env` con el siguiente contenido:
+
+```env
+# Configuración de la base de datos
+DB_TYPE=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=tu_contraseña
+DB_NAME=autogestion
+DB_SYNCHRONIZE=false
+DB_LOGGING=false
+
+# Configuración del servidor
+PORT=3000
+NODE_ENV=development
+
+# Configuración de autenticación JWT
+JWT_SECRET=tu_clave_secreta_muy_segura
+JWT_EXPIRES_IN=1d
+
+# Configuración de CORS
+CORS_ORIGIN=http://localhost:3001
+CORS_METHODS=GET,HEAD,PUT,PATCH,POST,DELETE
+CORS_CREDENTIALS=true
+CORS_ALLOWED_HEADERS=Content-Type,Authorization
+```
+
+### Frontend (Next.js)
+
+1. **Crear archivo `.env.local`** en `/frontend/.env.local` con el siguiente contenido:
+
+```env
+# URL de la API del backend
+NEXT_PUBLIC_API_URL=http://localhost:3000
+
+# Configuración de autenticación
+NEXT_PUBLIC_JWT_SECRET=tu_clave_secreta_muy_segura
+NEXT_PUBLIC_JWT_EXPIRES_IN=1d
+
+# Configuración de CORS
+NEXT_PUBLIC_CORS_ORIGIN=http://localhost:3000
+```
+
+## 📌 Credenciales de Prueba
+
+- **Administrador:**
+  - Email: `admin@universidad.edu`
+  - Contraseña: `password123`
+
+- **Profesor:**
+  - Email: `profesor@universidad.edu`
+  - Contraseña: `password123`
+
+- **Estudiante:**
+  - Email: `estudiante@universidad.edu`
+  - Contraseña: `password123`
 
 ## 📝 Requisitos
 - Node.js 16+
