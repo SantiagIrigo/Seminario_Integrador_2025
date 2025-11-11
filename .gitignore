@@ -1,0 +1,8 @@
+.next/
+.vercel/
+out/
+*.pack
+*.pack.gz
+*.map
+*.log
+

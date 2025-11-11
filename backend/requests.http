@@ -1,0 +1,150 @@
+### Variables
+@host = http://localhost:3000
+@json = Content-Type: application/json
+
+### Auth - Login (admin)
+POST {{host}}/auth/login
+{{json}}
+
+{
+  "email": "admin@universidad.edu",
+  "password": "password123"
+}
+
+> {% client.global.set("ADMIN_TOKEN", response.body.access_token); %}
+
+### Auth - Login (secretaría)
+POST {{host}}/auth/login
+{{json}}
+
+{
+  "email": "secretaria@universidad.edu",
+  "password": "password123"
+}
+
+> {% client.global.set("SEC_TOKEN", response.body.access_token); %}
+
+### Auth - Login (estudiante)
+POST {{host}}/auth/login
+{{json}}
+
+{
+  "email": "estudiante@universidad.edu",
+  "password": "password123"
+}
+
+> {% client.global.set("EST_TOKEN", response.body.access_token); %}
+
+### Usuarios
+GET {{host}}/user
+
+### Materias
+GET {{host}}/materia
+GET {{host}}/materia/del-plan/1
+Authorization: Bearer {{EST_TOKEN}}
+
+### Inscripción a cursada
+GET {{host}}/inscripcion/materia/disponibles
+Authorization: Bearer {{EST_TOKEN}}
+
+POST {{host}}/inscripcion/materia/1
+Authorization: Bearer {{EST_TOKEN}}
+
+### Cursada (seguimiento)
+GET {{host}}/cursada/historial
+Authorization: Bearer {{EST_TOKEN}}
+
+GET {{host}}/cursada/cursando
+Authorization: Bearer {{EST_TOKEN}}
+
+### Evaluaciones
+# Profesor crea evaluación
+POST {{host}}/evaluacion
+Authorization: Bearer {{SEC_TOKEN}}
+{{json}}
+
+{
+  "materiaId": 1,
+  "estudianteId": 3,
+  "tipo": "parcial",
+  "nota": 8,
+  "titulo": "Parcial 1"
+}
+
+# Ver por materia (profesor)
+GET {{host}}/evaluacion/materia/1
+Authorization: Bearer {{SEC_TOKEN}}
+
+# Ver mis evaluaciones (estudiante)
+GET {{host}}/evaluacion/mi-materia/1
+Authorization: Bearer {{EST_TOKEN}}
+
+### Asistencia
+GET {{host}}/asistencia/mis-asistencias
+Authorization: Bearer {{EST_TOKEN}}
+
+### Comisiones
+POST {{host}}/comision
+Authorization: Bearer {{SEC_TOKEN}}
+{{json}}
+
+{
+  "materiaId": 1,
+  "nombre": "C",
+  "descripcion": "Turno tarde",
+  "profesorId": 2,
+  "cupoMaximo": 25
+}
+
+GET {{host}}/comision
+
+### Horarios
+POST {{host}}/horario
+Authorization: Bearer {{SEC_TOKEN}}
+{{json}}
+
+{
+  "materiaId": 1,
+  "dia": "lunes",
+  "horaInicio": "18:00",
+  "horaFin": "20:00",
+  "aula": "Aula 105"
+}
+
+GET {{host}}/horario/materia/1
+
+### Clases
+POST {{host}}/clase
+Authorization: Bearer {{SEC_TOKEN}}
+{{json}}
+
+{
+  "materiaId": 1,
+  "fecha": "2025-11-05T12:00:00.000Z",
+  "horarioId": 1,
+  "comisionId": 1,
+  "estado": "programada"
+}
+
+GET {{host}}/clase/materia/1
+
+### Exámenes finales
+GET {{host}}/examenes-finales
+Authorization: Bearer {{EST_TOKEN}}
+
+POST {{host}}/examenes-finales
+Authorization: Bearer {{ADMIN_TOKEN}}
+{{json}}
+
+{
+  "materiaId": 1,
+  "docenteId": 2,
+  "fecha": "2025-12-01",
+  "horaInicioTeorico": "14:00",
+  "horaFinTeorico": "16:00",
+  "aulaTeorico": "Aula 200"
+}
+
+### Examen (inscripción al final legado)
+POST {{host}}/examen/inscribirse/1
+Authorization: Bearer {{EST_TOKEN}}
