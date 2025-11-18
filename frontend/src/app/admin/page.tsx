@@ -11,7 +11,11 @@ import {
   Building,
   ShieldCheck,
   ArrowRight,
+  UserPlus,
+  BookPlus,
 } from 'lucide-react';
+import { AdminMateriasForm } from '@/components/admin/AdminMateriasForm';
+import { AdminUsuariosForm } from '@/components/admin/AdminUsuariosForm';
 
 const adminStats = [
   {
@@ -63,6 +67,18 @@ const adminActions = [
     href: '/horarios',
     icon: ShieldCheck,
   },
+  {
+    title: 'Crear materia',
+    description: 'Accedé al formulario de alta rápida.',
+    href: '#gestionar-materias',
+    icon: BookPlus,
+  },
+  {
+    title: 'Crear usuario',
+    description: 'Generá nuevas cuentas y asigná roles.',
+    href: '#gestionar-usuarios',
+    icon: UserPlus,
+  },
 ];
 
 export default function AdminHomePage() {
@@ -106,8 +122,8 @@ export default function AdminHomePage() {
           })}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {adminActions.map((action) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {adminActions.map(action => {
             const Icon = action.icon;
             return (
               <Card key={action.title} className="flex flex-col">
@@ -135,6 +151,15 @@ export default function AdminHomePage() {
               </Card>
             );
           })}
+        </div>
+
+        <div className="space-y-8">
+          <div id="gestionar-materias">
+            <AdminMateriasForm />
+          </div>
+          <div id="gestionar-usuarios">
+            <AdminUsuariosForm />
+          </div>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ export class MateriaResponseDto {
   id: number;
   nombre: string;
   descripcion?: string;
-  departamento: {
+  departamento?: {
     id: number;
     nombre: string;
   };
@@ -19,7 +19,7 @@ export class MateriaResponseDto {
     planEstudioId: number;
     planEstudioNombre: string;
     nivel: number;
-    carrera: {
+    carrera?: {
       id: number;
       nombre: string;
     };

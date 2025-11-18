@@ -348,14 +348,18 @@ export class MateriaService {
   }
 
   private mapToResponseDto(materia: Materia): MateriaResponseDto {
+    const departamento = materia.departamento
+      ? {
+          id: materia.departamento.id,
+          nombre: materia.departamento.nombre,
+        }
+      : undefined;
+
     return {
       id: materia.id,
       nombre: materia.nombre,
       descripcion: materia.descripcion,
-      departamento: {
-        id: materia.departamento.id,
-        nombre: materia.departamento.nombre,
-      },
+      departamento,
       nivel: materia.relacionesConPlanes?.[0]?.nivel,
       correlativasCursada: materia.correlativasCursada?.map(c => ({
         id: c.correlativa.id,
@@ -365,15 +369,27 @@ export class MateriaService {
         id: c.correlativa.id,
         nombre: c.correlativa.nombre,
       })) || [],
-      planesEstudio: materia.relacionesConPlanes?.map(r => ({
-        planEstudioId: r.planEstudio.id,
-        planEstudioNombre: r.planEstudio.nombre,
-        nivel: r.nivel,
-        carrera: {
-          id: r.planEstudio.carrera.id,
-          nombre: r.planEstudio.carrera.nombre,
-        },
-      })) || [],
+      planesEstudio: materia.relacionesConPlanes
+        ?.map(r => {
+          if (!r.planEstudio) {
+            return null;
+          }
+
+          const carrera = r.planEstudio.carrera
+            ? {
+                id: r.planEstudio.carrera.id,
+                nombre: r.planEstudio.carrera.nombre,
+              }
+            : undefined;
+
+          return {
+            planEstudioId: r.planEstudio.id,
+            planEstudioNombre: r.planEstudio.nombre,
+            nivel: r.nivel,
+            carrera,
+          };
+        })
+        .filter((plan): plan is NonNullable<typeof plan> => plan !== null) || [],
     };
   }
 }

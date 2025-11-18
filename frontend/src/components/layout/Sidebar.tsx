@@ -16,6 +16,8 @@ import {
   FileText,
   UserCheck,
   LogOut,
+  UserPlus,
+  BookPlus,
 } from 'lucide-react';
 
 interface NavItem {
@@ -33,6 +35,8 @@ const navItems: NavItem[] = [
   { title: 'Mis Asistencias', href: '/estudiante/asistencias', icon: UserCheck, roles: ['estudiante'] },
   { title: 'Exámenes', href: '/examenes', icon: FileText, roles: ['estudiante'] },
   { title: 'Gestión de Asistencias', href: '/admin/asistencia', icon: ClipboardList, roles: ['secretaria_academica', 'admin'] },
+  { title: 'Alta de Materias', href: '/admin#gestionar-materias', icon: BookPlus, roles: ['admin'] },
+  { title: 'Alta de Usuarios', href: '/admin#gestionar-usuarios', icon: UserPlus, roles: ['admin'] },
 ];
 
 export function Sidebar() {
@@ -68,9 +72,12 @@ export function Sidebar() {
 
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         <div className="space-y-1">
-          {filteredItems.map((item) => {
+          {filteredItems.map(item => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+            const hrefPath = typeof item.href === 'string' ? item.href : '';
+            const basePath = hrefPath.includes('#') ? hrefPath.split('#')[0] : hrefPath;
+            const isAnchor = Boolean(basePath);
+            const isActive = isAnchor ? pathname === basePath : pathname === item.href;
 
             return (
               <Link
