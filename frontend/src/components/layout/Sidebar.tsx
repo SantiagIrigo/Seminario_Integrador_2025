@@ -18,6 +18,8 @@ import {
   LogOut,
   UserPlus,
   BookPlus,
+  Building,
+  Layers,
 } from 'lucide-react';
 
 interface NavItem {
@@ -35,6 +37,8 @@ const navItems: NavItem[] = [
   { title: 'Mis Asistencias', href: '/estudiante/asistencias', icon: UserCheck, roles: ['estudiante'] },
   { title: 'Exámenes', href: '/examenes', icon: FileText, roles: ['estudiante'] },
   { title: 'Gestión de Asistencias', href: '/admin/asistencia', icon: ClipboardList, roles: ['secretaria_academica', 'admin'] },
+  { title: 'Alta de Carreras', href: '/admin#gestionar-carreras', icon: Building, roles: ['admin'] },
+  { title: 'Alta de Planes', href: '/admin#gestionar-planes', icon: Layers, roles: ['admin'] },
   { title: 'Alta de Materias', href: '/admin#gestionar-materias', icon: BookPlus, roles: ['admin'] },
   { title: 'Alta de Usuarios', href: '/admin#gestionar-usuarios', icon: UserPlus, roles: ['admin'] },
 ];

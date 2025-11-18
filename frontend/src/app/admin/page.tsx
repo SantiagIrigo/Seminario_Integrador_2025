@@ -13,9 +13,13 @@ import {
   ArrowRight,
   UserPlus,
   BookPlus,
+  University,
+  Layers,
 } from 'lucide-react';
 import { AdminMateriasForm } from '@/components/admin/AdminMateriasForm';
 import { AdminUsuariosForm } from '@/components/admin/AdminUsuariosForm';
+import { AdminCarrerasForm } from '@/components/admin/AdminCarrerasForm';
+import { AdminPlanesEstudioForm } from '@/components/admin/AdminPlanesEstudioForm';
 
 const adminStats = [
   {
@@ -78,6 +82,18 @@ const adminActions = [
     description: 'Generá nuevas cuentas y asigná roles.',
     href: '#gestionar-usuarios',
     icon: UserPlus,
+  },
+  {
+    title: 'Crear carrera',
+    description: 'Definí nuevas carreras antes de asociarlas a planes.',
+    href: '#gestionar-carreras',
+    icon: University,
+  },
+  {
+    title: 'Crear plan de estudio',
+    description: 'Asociá planes al calendario académico.',
+    href: '#gestionar-planes',
+    icon: Layers,
   },
 ];
 
@@ -154,6 +170,12 @@ export default function AdminHomePage() {
         </div>
 
         <div className="space-y-8">
+          <div id="gestionar-carreras">
+            <AdminCarrerasForm />
+          </div>
+          <div id="gestionar-planes">
+            <AdminPlanesEstudioForm />
+          </div>
           <div id="gestionar-materias">
             <AdminMateriasForm />
           </div>

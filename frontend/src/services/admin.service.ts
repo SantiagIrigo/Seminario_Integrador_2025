@@ -7,6 +7,12 @@ export interface Departamento {
   descripcion?: string;
 }
 
+export interface Carrera {
+  id: number;
+  nombre: string;
+  descripcion?: string;
+}
+
 export interface PlanEstudioOption {
   id: number;
   nombre: string;
@@ -16,6 +22,11 @@ export interface PlanEstudioOption {
     id: number;
     nombre: string;
   };
+}
+
+export interface CreateCarreraPayload {
+  nombre: string;
+  descripcion?: string;
 }
 
 export interface CreateMateriaPayload {
@@ -43,6 +54,13 @@ export interface MateriaListResponse {
   limit: number;
 }
 
+export interface CreatePlanEstudioPayload {
+  nombre: string;
+  descripcion?: string;
+  año: number;
+  carreraId: number;
+}
+
 export interface CreateUserPayload {
   nombre: string;
   apellido: string;
@@ -64,6 +82,11 @@ export interface UserListResponse {
 const AdminService = {
   async getDepartamentos(): Promise<Departamento[]> {
     const { data } = await api.get<Departamento[]>('/departamento');
+    return Array.isArray(data) ? data : [];
+  },
+
+  async getCarreras(): Promise<Carrera[]> {
+    const { data } = await api.get<Carrera[]>('/carrera');
     return Array.isArray(data) ? data : [];
   },
 
@@ -96,6 +119,16 @@ const AdminService = {
 
   async createMateria(payload: CreateMateriaPayload): Promise<MateriaAdmin> {
     const { data } = await api.post<MateriaAdmin>('/materia', payload);
+    return data;
+  },
+
+  async createCarrera(payload: CreateCarreraPayload): Promise<Carrera> {
+    const { data } = await api.post<Carrera>('/carrera', payload);
+    return data;
+  },
+
+  async createPlanEstudio(payload: CreatePlanEstudioPayload): Promise<PlanEstudioOption> {
+    const { data } = await api.post<PlanEstudioOption>('/plan-estudio', payload);
     return data;
   },
 
