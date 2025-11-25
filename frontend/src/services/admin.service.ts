@@ -100,20 +100,15 @@ const AdminService = {
       params: { page, limit },
     });
 
-    if (Array.isArray(data)) {
-      return {
-        items: data as MateriaAdmin[],
-        total: data.length,
-        page: 1,
-        limit: data.length,
-      };
-    }
-
     return {
-      items: data?.items ?? [],
-      total: data?.meta?.totalItems ?? 0,
-      page: data?.meta?.currentPage ?? page,
-      limit: data?.meta?.itemsPerPage ?? limit,
+      items: Array.isArray(data) ? (data as MateriaAdmin[]) : data?.items ?? data?.data ?? [],
+      total: Array.isArray(data)
+        ? data.length
+        : data?.total ?? data?.meta?.totalItems ?? data?.data?.length ?? 0,
+      page: Array.isArray(data) ? 1 : data?.page ?? data?.meta?.currentPage ?? page,
+      limit: Array.isArray(data)
+        ? data.length
+        : data?.limit ?? data?.meta?.itemsPerPage ?? limit,
     };
   },
 
@@ -137,20 +132,15 @@ const AdminService = {
       params: { page, limit },
     });
 
-    if (Array.isArray(data)) {
-      return {
-        items: data as User[],
-        total: data.length,
-        page: 1,
-        limit: data.length,
-      };
-    }
-
     return {
-      items: data?.items ?? [],
-      total: data?.meta?.totalItems ?? 0,
-      page: data?.meta?.currentPage ?? page,
-      limit: data?.meta?.itemsPerPage ?? limit,
+      items: Array.isArray(data) ? (data as User[]) : data?.items ?? data?.data ?? [],
+      total: Array.isArray(data)
+        ? data.length
+        : data?.total ?? data?.meta?.totalItems ?? data?.data?.length ?? 0,
+      page: Array.isArray(data) ? 1 : data?.page ?? data?.meta?.currentPage ?? page,
+      limit: Array.isArray(data)
+        ? data.length
+        : data?.limit ?? data?.meta?.itemsPerPage ?? limit,
     };
   },
 
